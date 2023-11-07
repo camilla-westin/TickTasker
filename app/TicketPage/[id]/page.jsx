@@ -1,5 +1,11 @@
+import EditTicketForm from "@/app/(components)/EditTicketForm";
+
 const TicketPage = ({ params }) => {
-  return <main>Ticketpage {params.id}</main>;
+  return (
+    <main>
+      <EditTicketForm />
+    </main>
+  );
 };
 
 export default TicketPage;
