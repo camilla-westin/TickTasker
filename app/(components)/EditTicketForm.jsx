@@ -49,7 +49,7 @@ const EditTicketForm = () => {
         onSubmit={handleSubmit}
       >
         <h2>Create ticket</h2>
-        <label for="title">Title</label>
+        <label htmlFor="title">Title</label>
         <input
           id="title"
           name="title"
@@ -58,7 +58,7 @@ const EditTicketForm = () => {
           required={true}
           value={formData.title}
         />
-        <label for="description">Description</label>
+        <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
@@ -67,7 +67,7 @@ const EditTicketForm = () => {
           value={formData.description}
           rows="5"
         />
-        <label for="category">Category</label>
+        <label htmlFor="category">Category</label>
         <select
           name="category"
           value={formData.category}
@@ -76,54 +76,59 @@ const EditTicketForm = () => {
           <option value="Hardware problem">Hardware problem</option>
           <option value="Software problem">Software problem</option>
         </select>
-        <label for="priority">Priority</label>
+        <label htmlFor="priority">Priority</label>
         <div>
           <input
-            id="priorty-1"
-            name="priority-1"
+            id="priority-1"
+            name="priority"
             type="radio"
             onChange={handleChange}
             value={1}
             checked={formData.priority == 1}
           />
-          <label>1</label>
+          <label htmlFor="priority-1">1</label>
+
           <input
-            id="priorty-2"
-            name="priority-2"
+            id="priority-2"
+            name="priority"
             type="radio"
             onChange={handleChange}
             value={2}
             checked={formData.priority == 2}
           />
-          <label>2</label>
+          <label htmlFor="priority-2">2</label>
+
           <input
-            id="priorty-3"
-            name="priority-3"
+            id="priority-3"
+            name="priority"
             type="radio"
             onChange={handleChange}
             value={3}
             checked={formData.priority == 3}
           />
-          <label>3</label>
+          <label htmlFor="priority-3">3</label>
+
           <input
-            id="priorty-4"
-            name="priority-4"
+            id="priority-4"
+            name="priority"
             type="radio"
             onChange={handleChange}
             value={4}
             checked={formData.priority == 4}
           />
-          <label>4</label>
+          <label htmlFor="priority-4">4</label>
+
           <input
-            id="priorty-5"
-            name="priority-5"
+            id="priority-5"
+            name="priority"
             type="radio"
             onChange={handleChange}
-            value={3}
+            value={5}
             checked={formData.priority == 5}
           />
-          <label>5</label>
+          <label htmlFor="priority-5">5</label>
         </div>
+
         <label>Progress</label>
         <input
           type="range"
