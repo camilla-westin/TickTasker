@@ -141,9 +141,9 @@ const EditTicketForm = () => {
         />
         <label>Status</label>
         <select name="status" value={formData.status} onChange={handleChange}>
-          <option value="not started"> Not started</option>
-          <option value="started">started</option>
-          <option value="done">Done</option>
+          <option value="Not started">Not started</option>
+          <option value="Started">Started</option>
+          <option value="Done">Done</option>
         </select>
         <input type="submit" className="btn" value="Create ticket" />
       </form>
