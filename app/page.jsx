@@ -16,7 +16,7 @@ const getTickets = async () => {
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState(null);
+  const [categoryFilters, setCategoryFilters] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
 
   useEffect(() => {
@@ -35,39 +35,46 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  function handleCatFilter(cat) {
-    setCategoryFilter(cat);
+  function toggleCatFilter(cat) {
+    if (categoryFilters.includes(cat)) {
+      setCategoryFilters(
+        categoryFilters.filter((category) => category !== cat)
+      );
+    } else {
+      setCategoryFilters([...categoryFilters, cat]);
+    }
   }
 
-  const filteredTickets = categoryFilter
-    ? tickets.filter((ticket) => ticket.category === categoryFilter)
-    : tickets;
+  const filteredTickets =
+    categoryFilters.length > 0
+      ? tickets.filter((ticket) => categoryFilters.includes(ticket.category))
+      : tickets;
 
   return (
-    <main className="p-5">
-      <div>
-        <div className="mb-4 flex justify-end">
-          <button
-            className={`rounded-3xl border border-black border-solid inline-block bg-white mr-2 mb-4 px-3 py-1 ${
-              categoryFilter === null ? "border-2" : ""
-            }`}
-            onClick={() => handleCatFilter(null)}
-          >
+    <main className="">
+      <div className="flex">
+        <div className="mb-4 bg-white w-1/5 p-5 max-h-screen">
+          <label className="mb-4 font-semibold">Filter by Categories:</label>
+          <label className="block mb-2">
+            <input
+              type="checkbox"
+              checked={categoryFilters.length === 0}
+              onChange={() => setCategoryFilters([])}
+            />{" "}
             All
-          </button>
+          </label>
           {uniqueCategories.map((uniqueCategory, categoryIndex) => (
-            <button
-              key={categoryIndex}
-              onClick={() => handleCatFilter(uniqueCategory)}
-              className={`rounded-3xl border border-black border-solid inline-block bg-white mr-2 mb-4 px-3 py-1 ${
-                categoryFilter === uniqueCategory ? "border-2" : ""
-              }`}
-            >
+            <label className="block mb-2" key={categoryIndex}>
+              <input
+                type="checkbox"
+                checked={categoryFilters.includes(uniqueCategory)}
+                onChange={() => toggleCatFilter(uniqueCategory)}
+              />{" "}
               {uniqueCategory}
-            </button>
+            </label>
           ))}
         </div>
-        <div className="lg:grid grid-cols-2 xl:grid-cols-4">
+        <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5 w-4/5">
           {filteredTickets.map((ticket, _index) => (
             <TicketCard id={_index} key={_index} ticket={ticket} />
           ))}
