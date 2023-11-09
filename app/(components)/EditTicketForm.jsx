@@ -152,7 +152,7 @@ const EditTicketForm = ({ ticket }) => {
           <label htmlFor="priority-5">5</label>
         </div>
 
-        <label>Progress</label>
+        <label htmlFor="progress">Progress</label>
         <input
           type="range"
           id="progress"

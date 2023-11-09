@@ -14,12 +14,18 @@ module.exports = {
       },
       colors: {
         nav: "#18222f",
-        page: "#2b3441",
-        card: "#47566a",
-        "card-hover": "#4f5e74",
-        "default-text": "#f1f3f5",
+        page: "#f5f5f5",
+        card: "#f1f2f3",
+        "card-hover": "#f8f8f8",
+        "default-text": "#222",
         "blue-accent": "#0084d4",
         "blue-accent-hover": "#009fff",
+      },
+      fontFamily: {
+        roboto: ["Roboto Slab", "sans-serif"],
+      },
+      boxShadow: {
+        card: "0 4px 22px 0 rgba(0, 0, 0, 0.09)",
       },
     },
   },

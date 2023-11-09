@@ -1,4 +1,3 @@
-import { Timestamp } from "mongodb";
 import DeleteBlock from "./DeleteBlock";
 import PriorityDisplay from "./PriorityDisplay";
 import ProgressDisplay from "./ProgressDisplay";
@@ -21,7 +20,7 @@ const TicketCard = ({ ticket }) => {
   };
 
   return (
-    <div className="flex flex-col bg-card hover:bg-card-hover rounded-md shadow-lg p-3 m-2">
+    <div className="flex flex-col bg-white hover:bg-card-hover rounded-md shadow-card p-3 m-2">
       <div className="flex mb-3 ">
         <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">

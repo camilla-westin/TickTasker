@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "Roboto Slab";
+}
+
 @layer base {
   h1,
   h2,
@@ -40,7 +44,7 @@
 
 @layer components {
   .icon {
-    @apply text-default-text text-xl;
+    @apply text-white text-xl;
   }
 
   .btn {

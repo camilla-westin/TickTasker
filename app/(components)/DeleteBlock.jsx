@@ -16,11 +16,12 @@ const DeleteBlock = ({ id }) => {
     }
   };
   return (
-    <FontAwesomeIcon
-      icon={faX}
-      className="text-red-400 hover:cursor-pointer hover:text-red-200"
-      onClick={deleteTicket}
-    />
+    <button onClick={deleteTicket}>
+      <FontAwesomeIcon
+        icon={faX}
+        className="text-slate-400 hover:cursor-pointer hover:text-slate-200"
+      />
+    </button>
   );
 };
 
