@@ -5,10 +5,10 @@ const StatusDisplay = ({ status }) => {
       case "done":
         color = "bg-green-200";
         return color;
-      case "started":
+      case "doing":
         color = "bg-yellow-200";
         return color;
-      case "not started":
+      case "to do":
         color = "bg-red-200";
         return color;
     }

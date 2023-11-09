@@ -45,6 +45,9 @@ const Dashboard = () => {
     }
   }
 
+  const filterTicketsByStatus = (status) =>
+    filteredTickets.filter((ticket) => ticket.status === status);
+
   const filteredTickets =
     categoryFilters.length > 0
       ? tickets.filter((ticket) => categoryFilters.includes(ticket.category))
@@ -75,9 +78,24 @@ const Dashboard = () => {
           ))}
         </div>
         <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5 w-4/5">
-          {filteredTickets.map((ticket, _index) => (
-            <TicketCard id={_index} key={_index} ticket={ticket} />
-          ))}
+          <div>
+            <h3>To do</h3>
+            {filterTicketsByStatus("To do").map((ticket, _index) => (
+              <TicketCard id={_index} key={_index} ticket={ticket} />
+            ))}
+          </div>
+          <div>
+            <h3>Doing</h3>
+            {filterTicketsByStatus("Doing").map((ticket, _index) => (
+              <TicketCard id={_index} key={_index} ticket={ticket} />
+            ))}
+          </div>
+          <div>
+            <h3>Done</h3>
+            {filterTicketsByStatus("Done").map((ticket, _index) => (
+              <TicketCard id={_index} key={_index} ticket={ticket} />
+            ))}
+          </div>
         </div>
       </div>
     </main>

@@ -50,7 +50,7 @@ const EditTicketForm = ({ ticket }) => {
     description: "",
     priority: 1,
     progress: 0,
-    status: "not started",
+    status: "To do",
     category: "Hardware problem",
   };
 
@@ -164,8 +164,8 @@ const EditTicketForm = ({ ticket }) => {
         />
         <label>Status</label>
         <select name="status" value={formData.status} onChange={handleChange}>
-          <option value="Not started">Not started</option>
-          <option value="Started">Started</option>
+          <option value="To do">To do</option>
+          <option value="Doing">Doing</option>
           <option value="Done">Done</option>
         </select>
         <input
