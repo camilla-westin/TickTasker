@@ -20,7 +20,7 @@ const TicketCard = ({ ticket }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white hover:bg-card-hover rounded-md shadow-card p-3 m-2">
+    <div className="flex flex-col bg-white border border-gray-100 hover:bg-card-hover rounded-md shadow-xl p-3 m-2">
       <div className="flex mb-3 ">
         <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">
@@ -28,7 +28,7 @@ const TicketCard = ({ ticket }) => {
         </div>
       </div>
       <Link href={`/TicketPage/${ticket._id}`} style={{ display: "contents" }}>
-        <h2 className="text-md">{ticket.title}</h2>
+        <h3 className="text-md">{ticket.title}</h3>
         <hr className="h-px border-0 bg-page mb-2 mt-2" />
         <p className="whitespace-pre-wrap">{ticket.description}</p>
         <div className="flex-grow"></div>

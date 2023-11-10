@@ -16,32 +16,28 @@ const getTickets = async () => {
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
-  const [categoryFilters, setCategoryFilters] = useState([]);
-  const [uniqueCategories, setUniqueCategories] = useState([]);
+  const [typeFilters, setTypeFilters] = useState([]);
+  const [uniqueTypes, setUniqueTypes] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTickets();
 
-      const uniqueCategoriesSet = new Set(
-        data.tickets.map(({ category }) => category)
-      );
-      const uniqueCategories = Array.from(uniqueCategoriesSet);
+      const uniqueTypesSet = new Set(data.tickets.map(({ type }) => type));
+      const uniqueTypes = Array.from(uniqueTypesSet);
 
       setTickets(data.tickets || []);
-      setUniqueCategories(uniqueCategories);
+      setUniqueTypes(uniqueTypes);
     };
 
     fetchData();
   }, []);
 
-  function toggleCatFilter(cat) {
-    if (categoryFilters.includes(cat)) {
-      setCategoryFilters(
-        categoryFilters.filter((category) => category !== cat)
-      );
+  function toggleTypeFilter(typ) {
+    if (typeFilters.includes(typ)) {
+      setTypeFilters(typeFilters.filter((type) => type !== typ));
     } else {
-      setCategoryFilters([...categoryFilters, cat]);
+      setTypeFilters([...typeFilters, typ]);
     }
   }
 
@@ -49,49 +45,49 @@ const Dashboard = () => {
     filteredTickets.filter((ticket) => ticket.status === status);
 
   const filteredTickets =
-    categoryFilters.length > 0
-      ? tickets.filter((ticket) => categoryFilters.includes(ticket.category))
+    typeFilters.length > 0
+      ? tickets.filter((ticket) => typeFilters.includes(ticket.type))
       : tickets;
 
   return (
     <main className="">
       <div className="flex">
         <div className="mb-4 bg-white w-1/5 p-5 max-h-screen">
-          <label className="mb-4 font-semibold">Filter by Categories:</label>
+          <label className="mb-4 font-semibold">Filter by type:</label>
           <label className="block mb-2">
             <input
               type="checkbox"
-              checked={categoryFilters.length === 0}
-              onChange={() => setCategoryFilters([])}
+              checked={typeFilters.length === 0}
+              onChange={() => setTypeFilters([])}
             />{" "}
             All
           </label>
-          {uniqueCategories.map((uniqueCategory, categoryIndex) => (
-            <label className="block mb-2" key={categoryIndex}>
+          {uniqueTypes.map((uniqueType, typeIndex) => (
+            <label className="block mb-2" key={typeIndex}>
               <input
                 type="checkbox"
-                checked={categoryFilters.includes(uniqueCategory)}
-                onChange={() => toggleCatFilter(uniqueCategory)}
+                checked={typeFilters.includes(uniqueType)}
+                onChange={() => toggleTypeFilter(uniqueType)}
               />{" "}
-              {uniqueCategory}
+              {uniqueType}
             </label>
           ))}
         </div>
         <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5 w-4/5">
-          <div>
-            <h3>To do</h3>
+          <div className="bg-white p-2 rounded h-screen m-2 shadow-lg">
+            <h2 className="p-2 text-xl">To do</h2>
             {filterTicketsByStatus("To do").map((ticket, _index) => (
               <TicketCard id={_index} key={_index} ticket={ticket} />
             ))}
           </div>
-          <div>
-            <h3>Doing</h3>
+          <div className="bg-white shadow-lg p-2 rounded h-screen m-2">
+            <h2 className="p-2 text-xl">Doing</h2>
             {filterTicketsByStatus("Doing").map((ticket, _index) => (
               <TicketCard id={_index} key={_index} ticket={ticket} />
             ))}
           </div>
-          <div>
-            <h3>Done</h3>
+          <div className="bg-white shadow-lg p-2 rounded h-screen m-2">
+            <h2 className="p-2 text-xl">Done</h2>
             {filterTicketsByStatus("Done").map((ticket, _index) => (
               <TicketCard id={_index} key={_index} ticket={ticket} />
             ))}

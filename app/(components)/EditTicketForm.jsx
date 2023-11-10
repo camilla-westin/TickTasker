@@ -51,7 +51,7 @@ const EditTicketForm = ({ ticket }) => {
     priority: 1,
     progress: 0,
     status: "To do",
-    category: "Hardware problem",
+    type: "Story",
   };
 
   if (EDITMODE) {
@@ -60,7 +60,7 @@ const EditTicketForm = ({ ticket }) => {
     startingTicketData["priority"] = ticket.priority;
     startingTicketData["progress"] = ticket.progress;
     startingTicketData["status"] = ticket.status;
-    startingTicketData["category"] = ticket.category;
+    startingTicketData["type"] = ticket.type;
   }
 
   const [formData, setFormData] = useState(startingTicketData);
@@ -90,14 +90,10 @@ const EditTicketForm = ({ ticket }) => {
           value={formData.description}
           rows="5"
         />
-        <label htmlFor="category">Category</label>
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        >
-          <option value="Hardware problem">Hardware problem</option>
-          <option value="Software problem">Software problem</option>
+        <label htmlFor="type">Type</label>
+        <select name="type" value={formData.type} onChange={handleChange}>
+          <option value="Bug">Bug</option>
+          <option value="Story">Story</option>
         </select>
         <label htmlFor="priority">Priority</label>
         <div>
