@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import TicketCard from "./(components)/TicketCard";
+import React, { useState, useEffect } from "react";
+import FilterCheckbox from "@/app/(components)/FilterCheckbox";
+import TicketColumn from "@/app/(components)/TicketColumn";
 
 const getTickets = async () => {
   try {
@@ -54,44 +55,30 @@ const Dashboard = () => {
       <div className="flex">
         <div className="mb-4 bg-white w-1/5 p-5 max-h-screen">
           <label className="mb-4 font-semibold">Filter by type:</label>
-          <label className="block mb-2">
-            <input
-              type="checkbox"
-              checked={typeFilters.length === 0}
-              onChange={() => setTypeFilters([])}
-            />{" "}
-            All
-          </label>
+          <FilterCheckbox
+            label="All"
+            checked={typeFilters.length === 0}
+            onChange={() => setTypeFilters([])}
+          />
           {uniqueTypes.map((uniqueType, typeIndex) => (
-            <label className="block mb-2" key={typeIndex}>
-              <input
-                type="checkbox"
-                checked={typeFilters.includes(uniqueType)}
-                onChange={() => toggleTypeFilter(uniqueType)}
-              />{" "}
-              {uniqueType}
-            </label>
+            <FilterCheckbox
+              key={typeIndex}
+              label={uniqueType}
+              checked={typeFilters.includes(uniqueType)}
+              onChange={() => toggleTypeFilter(uniqueType)}
+            />
           ))}
         </div>
         <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5 w-4/5">
-          <div className="bg-white p-2 rounded h-screen m-2 shadow-lg">
-            <h2 className="p-2 text-xl">To do</h2>
-            {filterTicketsByStatus("To do").map((ticket, _index) => (
-              <TicketCard id={_index} key={_index} ticket={ticket} />
-            ))}
-          </div>
-          <div className="bg-white shadow-lg p-2 rounded h-screen m-2">
-            <h2 className="p-2 text-xl">Doing</h2>
-            {filterTicketsByStatus("Doing").map((ticket, _index) => (
-              <TicketCard id={_index} key={_index} ticket={ticket} />
-            ))}
-          </div>
-          <div className="bg-white shadow-lg p-2 rounded h-screen m-2">
-            <h2 className="p-2 text-xl">Done</h2>
-            {filterTicketsByStatus("Done").map((ticket, _index) => (
-              <TicketCard id={_index} key={_index} ticket={ticket} />
-            ))}
-          </div>
+          <TicketColumn
+            title="To do"
+            tickets={filterTicketsByStatus("To do")}
+          />
+          <TicketColumn
+            title="Doing"
+            tickets={filterTicketsByStatus("Doing")}
+          />
+          <TicketColumn title="Done" tickets={filterTicketsByStatus("Done")} />
         </div>
       </div>
     </main>
