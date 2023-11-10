@@ -1,19 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import getTickets from "@/app/api/Tickets/getTickets";
 import FilterCheckbox from "@/app/(components)/FilterCheckbox";
 import TicketColumn from "@/app/(components)/TicketColumn";
-
-const getTickets = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/Tickets", {
-      cache: "no-store",
-    });
-
-    return res.json();
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-};
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
