@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import AdminNav from "./AdminNav";
 
 const Nav = async () => {
   const session = await getServerSession(options);
@@ -11,7 +12,7 @@ const Nav = async () => {
       <div className="flex items-center space-x-4">
         <Link href="/">
           <FontAwesomeIcon icon={faHome} className="icon" />
-          <span className="text-white pl-2">Home</span>
+          <span className="text-white pl-2">Dashboard</span>
         </Link>
         <Link href="/TicketPage/new">
           <FontAwesomeIcon icon={faTicket} className="icon" />
@@ -19,10 +20,6 @@ const Nav = async () => {
         </Link>
       </div>
       <div>
-        <Link href="/CreateUser">
-          <FontAwesomeIcon icon={faTicket} className="icon" />
-          <span className="text-white pl-2">Create user</span>
-        </Link>
         <Link href="/ClientMember">
           <FontAwesomeIcon icon={faTicket} className="icon" />
           <span className="text-white pl-2">Client member</span>
@@ -31,23 +28,13 @@ const Nav = async () => {
           <FontAwesomeIcon icon={faTicket} className="icon" />
           <span className="text-white pl-2">Member</span>
         </Link>
-        <Link href="/Public">
-          <FontAwesomeIcon icon={faTicket} className="icon" />
-          <span className="text-white pl-2">Public</span>
-        </Link>
-        {session ? (
-          <Link href="/api/auth/signout?callbackUrl=/">
-            <span className="text-white pl-2">Logout</span>
-          </Link>
-        ) : (
+        {session ? null : (
           <Link href="/api/auth/signin">
             <span className="text-white pl-2">Login</span>
           </Link>
         )}
       </div>
-      <div>
-        <p className="text-white">camilla@gmail.com</p>
-      </div>
+      <AdminNav />
     </nav>
   );
 };
