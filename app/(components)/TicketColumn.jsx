@@ -7,7 +7,7 @@ const TicketColumn = ({ title, tickets, sorting }) => {
   }
 
   return (
-    <div className="bg-white p-2 rounded h-screen m-2 shadow-lg">
+    <div className="bg-white p-2 rounded h-min-screen m-2 shadow-lg">
       <h2 className="p-2 text-xl">{title}</h2>
       {tickets.map((ticket, _index) => (
         <TicketCard id={_index} key={_index} ticket={ticket} />
