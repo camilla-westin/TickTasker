@@ -1,4 +1,4 @@
-import { faTicket, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faTicket, faHome, faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
@@ -10,24 +10,24 @@ const Nav = async () => {
   return (
     <nav className="flex justify-between bg-nav p-4">
       <div className="flex items-center space-x-4">
-        <Link href="/">
+        <Link href="/" className="flex items-center">
           <FontAwesomeIcon icon={faHome} className="icon" />
           <span className="text-white pl-2">Dashboard</span>
         </Link>
-        <Link href="/TicketPage/new">
-          <FontAwesomeIcon icon={faTicket} className="icon" />
+        <Link href="/TicketPage/new" className="flex items-center">
+          <FontAwesomeIcon icon={faAdd} className="icon" />
           <span className="text-white pl-2">New ticket</span>
         </Link>
-      </div>
-      <div>
-        <Link href="/ClientMember">
+        {/* <Link href="/ClientMember">
           <FontAwesomeIcon icon={faTicket} className="icon" />
           <span className="text-white pl-2">Client member</span>
         </Link>
         <Link href="/Member">
           <FontAwesomeIcon icon={faTicket} className="icon" />
           <span className="text-white pl-2">Member</span>
-        </Link>
+        </Link> */}
+      </div>
+      <div>
         {session ? null : (
           <Link href="/api/auth/signin">
             <span className="text-white pl-2">Login</span>
