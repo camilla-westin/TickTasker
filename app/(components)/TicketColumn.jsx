@@ -3,7 +3,6 @@ import TicketCard from "@/app/(components)/TicketCard";
 
 const TicketColumn = ({ title, tickets, sorting }) => {
   if (sorting) {
-    console.log("Sorting enabled");
     tickets.sort((a, b) => b.priority - a.priority);
   }
 

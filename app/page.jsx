@@ -10,6 +10,7 @@ import { motion, useCycle } from "framer-motion";
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
+  const [priorityFilters, setPriorityFilters] = useState([]);
   const [uniqueTypes, setUniqueTypes] = useState([]);
   const [openFilterModule, cycleFilterModule] = useCycle(false, true);
 
@@ -30,13 +31,13 @@ const Dashboard = () => {
   const sideVariants = {
     closed: {
       transition: {
-        staggerChildren: 0.4,
+        staggerChildren: 0.2,
         staggerDirection: -1,
       },
     },
     open: {
       transition: {
-        staggerChildren: 0.4,
+        staggerChildren: 0.1,
         staggerDirection: 1,
       },
     },
@@ -56,8 +57,22 @@ const Dashboard = () => {
     }
   }
 
-  const filterTicketsByStatus = (status) =>
-    filteredTickets.filter((ticket) => ticket.status === status);
+  function togglePriorityFilter(priority) {
+    if (priorityFilters.includes(priority)) {
+      setPriorityFilters(priorityFilters.filter((p) => p !== priority));
+    } else {
+      setPriorityFilters([...priorityFilters, priority]);
+    }
+  }
+
+  const filterTicketsByStatusAndPriority = (status, priorityFilters) => {
+    return filteredTickets.filter(
+      (ticket) =>
+        ticket.status === status &&
+        (priorityFilters.length === 0 ||
+          priorityFilters.includes(ticket.priority))
+    );
+  };
 
   const filteredTickets =
     typeFilters.length > 0
@@ -100,6 +115,8 @@ const Dashboard = () => {
               uniqueTypes={uniqueTypes}
               toggleTypeFilter={toggleTypeFilter}
               variants={itemVariants}
+              togglePriorityFilter={togglePriorityFilter}
+              priorityFilters={priorityFilters}
             />
           </motion.div>
         </motion.aside>
@@ -120,17 +137,26 @@ const Dashboard = () => {
           <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5">
             <TicketColumn
               title="To do"
-              tickets={filterTicketsByStatus("To do")}
+              tickets={filterTicketsByStatusAndPriority(
+                "To do",
+                priorityFilters
+              )}
               sorting={true}
             />
             <TicketColumn
               title="Doing"
-              tickets={filterTicketsByStatus("Doing")}
+              tickets={filterTicketsByStatusAndPriority(
+                "Doing",
+                priorityFilters
+              )}
               sorting={false}
             />
             <TicketColumn
               title="Done"
-              tickets={filterTicketsByStatus("Done")}
+              tickets={filterTicketsByStatusAndPriority(
+                "Done",
+                priorityFilters
+              )}
               sorting={false}
             />
           </div>
