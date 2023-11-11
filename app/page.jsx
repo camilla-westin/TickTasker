@@ -121,14 +121,17 @@ const Dashboard = () => {
             <TicketColumn
               title="To do"
               tickets={filterTicketsByStatus("To do")}
+              sorting={true}
             />
             <TicketColumn
               title="Doing"
               tickets={filterTicketsByStatus("Doing")}
+              sorting={false}
             />
             <TicketColumn
               title="Done"
               tickets={filterTicketsByStatus("Done")}
+              sorting={false}
             />
           </div>
         </div>
