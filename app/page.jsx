@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import getTickets from "@/app/api/Tickets/getTickets";
 import FilterCheckbox from "@/app/(components)/FilterCheckbox";
 import TicketColumn from "@/app/(components)/TicketColumn";
+import FilterModule from "./(components)/FilterModule";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
@@ -40,34 +43,38 @@ const Dashboard = () => {
       : tickets;
 
   return (
-    <main className="">
+    <main>
       <div className="flex">
-        <div className="mb-4 bg-white w-1/5 p-5 max-h-screen">
-          <label className="mb-4 font-semibold">Filter by type:</label>
-          <FilterCheckbox
-            label="All"
-            checked={typeFilters.length === 0}
-            onChange={() => setTypeFilters([])}
-          />
-          {uniqueTypes.map((uniqueType, typeIndex) => (
-            <FilterCheckbox
-              key={typeIndex}
-              label={uniqueType}
-              checked={typeFilters.includes(uniqueType)}
-              onChange={() => toggleTypeFilter(uniqueType)}
+        <FilterModule
+          typeFilters={typeFilters}
+          setTypeFilters={setTypeFilters}
+          uniqueTypes={uniqueTypes}
+          toggleTypeFilter={toggleTypeFilter}
+        />
+        <div className="w-4/5">
+          <div className="w-full h-14 block p-6">
+            <button className="bg-white py-2 px-3 rounded-3xl text-black flex items-center shadow">
+              <FontAwesomeIcon
+                icon={faFilter}
+                className="text-black text-xl mr-2"
+              ></FontAwesomeIcon>
+              Filter
+            </button>
+          </div>
+          <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5">
+            <TicketColumn
+              title="To do"
+              tickets={filterTicketsByStatus("To do")}
             />
-          ))}
-        </div>
-        <div className="lg:grid grid-cols-2 xl:grid-cols-3 p-5 w-4/5">
-          <TicketColumn
-            title="To do"
-            tickets={filterTicketsByStatus("To do")}
-          />
-          <TicketColumn
-            title="Doing"
-            tickets={filterTicketsByStatus("Doing")}
-          />
-          <TicketColumn title="Done" tickets={filterTicketsByStatus("Done")} />
+            <TicketColumn
+              title="Doing"
+              tickets={filterTicketsByStatus("Doing")}
+            />
+            <TicketColumn
+              title="Done"
+              tickets={filterTicketsByStatus("Done")}
+            />
+          </div>
         </div>
       </div>
     </main>
