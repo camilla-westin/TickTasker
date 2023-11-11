@@ -9,6 +9,7 @@ import {
   faSignOutAlt,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const AdminNav = () => {
   const { data: session } = useSession({
@@ -22,7 +23,6 @@ const AdminNav = () => {
     setOpenAdminNav(!openAdminNav);
   };
 
-  // Close the dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -46,22 +46,36 @@ const AdminNav = () => {
   if (session) {
     menuItems.push(
       <Link href="/api/auth/signout?callbackUrl=/">
-        <FontAwesomeIcon
-          icon={faSignOutAlt}
-          className="text-black text-xl mr-2"
-        />
-        <span className="" key="logout">
-          Logout
-        </span>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FontAwesomeIcon
+            icon={faSignOutAlt}
+            className="text-black text-xl mr-2"
+          />
+          <span className="" key="logout">
+            Logout
+          </span>
+        </motion.div>
       </Link>
     );
     menuItems.unshift(
       <Link href="/CreateUser">
-        <FontAwesomeIcon
-          icon={faUserPlus}
-          className="text-black text-xl mr-2"
-        />
-        <span className="">Create user</span>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FontAwesomeIcon
+            icon={faUserPlus}
+            className="text-black text-xl mr-2"
+          />
+          <span className="">Create user</span>
+        </motion.div>
       </Link>
     );
   }
