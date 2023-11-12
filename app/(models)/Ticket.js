@@ -10,6 +10,7 @@ const ticketSchema = new Schema(
     description: String,
     type: String,
     priority: Number,
+    progress: Number,
     status: String,
     active: Boolean,
   },
