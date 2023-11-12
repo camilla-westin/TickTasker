@@ -1,4 +1,8 @@
-import { faTicket, faHome, faAdd } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faGripLinesVertical,
+  faGripVertical,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
@@ -8,11 +12,11 @@ import AdminNav from "./AdminNav";
 const Nav = async () => {
   const session = await getServerSession(options);
   return (
-    <nav className="flex justify-between bg-nav p-4">
+    <nav className="flex justify-between bg-nav p-5">
       <div className="flex items-center space-x-4">
         <Link href="/" className="flex items-center">
-          <FontAwesomeIcon icon={faHome} className="icon" />
-          <span className="text-white pl-2">Dashboard</span>
+          <FontAwesomeIcon icon={faGripVertical} className="icon" />
+          <span className="text-white pl-2">Board</span>
         </Link>
         <Link href="/TicketPage/new" className="flex items-center">
           <FontAwesomeIcon icon={faAdd} className="icon" />

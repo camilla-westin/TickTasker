@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faNavicon,
   faSignOutAlt,
+  faGear,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
@@ -56,9 +57,20 @@ const AdminNav = () => {
             icon={faSignOutAlt}
             className="text-black text-xl mr-2"
           />
-          <span className="" key="logout">
-            Logout
-          </span>
+          <span>Logout</span>
+        </motion.div>
+      </Link>
+    );
+    menuItems.push(
+      <Link href="/Settings">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FontAwesomeIcon icon={faGear} className="text-black text-xl mr-2" />
+          <span>Settings</span>
         </motion.div>
       </Link>
     );
@@ -74,7 +86,7 @@ const AdminNav = () => {
             icon={faUserPlus}
             className="text-black text-xl mr-2"
           />
-          <span className="">Create user</span>
+          <span>Create user</span>
         </motion.div>
       </Link>
     );
