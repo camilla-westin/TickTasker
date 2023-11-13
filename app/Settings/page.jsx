@@ -9,10 +9,13 @@ const Settings = async () => {
     redirect("/api/auth/signin?callbackUrl=/Settings");
   }
   return (
-    <div className="p-5">
+    <div className="p-5 ">
       <h1>Settings</h1>
-      <p>{session?.user?.email}</p>
-      <p>{session?.user?.role}</p>
+      <div className="mt-4 bg-white p-5 rounded lg:w-1/2">
+        <p>{session?.user.name}</p>
+        <p>{session?.user?.email}</p>
+        <p>{session?.user?.role}</p>
+      </div>
     </div>
   );
 };
